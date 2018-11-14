@@ -1,0 +1,22 @@
+{
+  "name": "@adopisowifi/save-config-btn",
+  "description": "A module used to save AdoPisoWiFi machine settings",
+  "main": "./src/save-config-btn.js",
+  "authors": [
+    "AdoPisoWiFi"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "adopisowifi",
+    "settings",
+    "config"
+  ],
+  "homepage": "https://github.com/AdoPisoWiFi/save-config-btn",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
