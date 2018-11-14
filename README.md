@@ -24,14 +24,18 @@ var app = angular.module('App', [
 ])
 ```
 
-Set where to submit data using `saveConfigBtnServiceProvider`:
+Set where to submit data using `adoConfigSerivceProvider`:
 ```javascript
-app.config(['saveConfigBtnServiceProvider', function(saveConfigBtnServiceProvider) {
+app.config(['adoConfigSerivceProvider', function(adoConfigSerivceProvider) {
 
-  saveConfigBtnServiceProvider.config({
-    method: 'POST',
-    url: '/settings/config',
-    params: {}
+  // defaults
+  adoConfigSerivceProvider.config({
+    get_method: 'GET',
+    get_url: '/settings/config',
+    get_params: {},
+    post_method: 'POST',
+    post_url: '/settings/config',
+    post_params: {}
   });
 
 }]);
@@ -48,3 +52,4 @@ HTML usage:
 </save-config-btn>
 
 ```
+

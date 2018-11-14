@@ -3,13 +3,16 @@
   'use strict';
 
   angular.module('ado.save-config-btn', [])
-    .provider('saveConfigBtnService', function() {
+    .provider('adoConfigService', function() {
 
       var provider = {};
       var globalConfig = {
-        params: {},
-        method: 'POST',
-        url: '/settings/config'
+        get_params: {},
+        get_method: 'GET',
+        get_url: '/settings/config',
+        post_params: {},
+        post_method: 'POST',
+        post_url: '/settings/config'
       };
 
       provider.config = function (config) {
@@ -18,16 +21,32 @@
 
       provider.$get = [
         '$http',
-        function saveConfigBtnService($http) {
+        function adoConfigSerivce($http) {
+
+          this.get = function (params) {
+
+            var _params = angular.copy(globalConfig.get_params);
+            params = params? angular.extend(_params, params) : _params;
+
+            return $http({
+              method: globalConfig.get_method,
+              url: globalConfig.get_url,
+              params: params
+            })
+              .then(function (res) {
+                res.data.dont_limit_stations = !res.data.limit_stations;
+                return res;
+              });
+          };
 
           this.update = function (config, params) {
 
-            var _params = angular.copy(globalConfig.params);
-            params = params? angular.extend(_params, params) : globalConfig.params;
+            var _params = angular.copy(globalConfig.post_params);
+            params = params? angular.extend(_params, params) : _params;
 
             return $http({
-              method: globalConfig.method,
-              url: globalConfig.url,
+              method: globalConfig.post_method,
+              url: globalConfig.post_url,
               params: params,
               data: config
             });
@@ -44,8 +63,8 @@
     .controller('SaveConfigBtnCtrl', [
       '$scope',
       '$rootScope',
-      'saveConfigBtnService',
-      function SaveConfigBtnCtrl($scope, $rootScope, saveConfigBtnService) {
+      'adoConfigSerivce',
+      function SaveConfigBtnCtrl($scope, $rootScope, adoConfigSerivce) {
 
         var $ctrl = this;
 
@@ -54,7 +73,7 @@
         $ctrl.submitting = false;
 
         $ctrl.submit = function (config) {
-          return saveConfigBtnService.update(config)
+          return adoConfigSerivce.update(config)
             .then(function (res) {
               $rootScope.$broadcast('settings:updated', res.data);
               if (typeof $ctrl.onSuccess == 'function')
