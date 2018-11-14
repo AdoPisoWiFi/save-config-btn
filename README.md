@@ -40,6 +40,11 @@ app.config(['saveConfigBtnServiceProvider', function(saveConfigBtnServiceProvide
 
 HTML usage:
 ```html
-<save-config-btn config="{max_bandwidth_down: 1024}" btn-class="btn-primary" ng-disabled="myForm.$invalid">Save Changes</save-config-btn>
+<save-config-btn
+  config="{max_bandwidth_down: 1024}"
+  btn-class="btn-primary"
+  ng-disabled="myForm.$invalid">
+    Save Changes
+</save-config-btn>
 
 ```
