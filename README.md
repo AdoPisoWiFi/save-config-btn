@@ -37,13 +37,28 @@ app.config(['saveConfigBtnServiceProvider', function(saveConfigBtnServiceProvide
 }]);
 
 ```
+Catch broadcast events:
+
+```javascript
+app.run(['$rootScope', function ($rootScope) {
+  $rootScope.$on('settings:updated', function (newConfig) {
+    console.log(newConfig);
+  });
+  
+  $rootScope.$on('settings:update:failed', function (res) {
+    console.log(res);
+  });
+}]);
+```
 
 HTML usage:
 ```html
 <save-config-btn
   config="{max_bandwidth_down: 1024}"
   btn-class="btn-primary"
-  ng-disabled="myForm.$invalid">
+  ng-disabled="myForm.$invalid"
+  onSuccess="$ctrl.onSuccess"
+  onError="$ctrl.onError">
     Save Changes
 </save-config-btn>
 
