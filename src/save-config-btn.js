@@ -56,6 +56,7 @@
       }
     ])
     .component('saveConfigBtn', {
+      transclude: true,
       controller: 'SaveConfigBtnCtrl',
       bindings: {
         btnClass: '@',

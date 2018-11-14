@@ -1,10 +1,11 @@
 {
   "name": "@adopisowifi/save-config-btn",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A module used to save AdoPisoWiFi machine settings",
   "main": "./src/save-config-btn.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "push-bower": "bower update ado-save-config-btn git@github.com:AdoPisoWiFi/save-config-btn.git"
   },
   "repository": {
     "type": "git",

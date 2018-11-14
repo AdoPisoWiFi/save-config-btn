@@ -1,5 +1,5 @@
 {
-  "name": "@adopisowifi/save-config-btn",
+  "name": "ado-save-config-btn",
   "description": "A module used to save AdoPisoWiFi machine settings",
   "main": "./src/save-config-btn.js",
   "authors": [
