@@ -17,7 +17,7 @@ $ bower install --save ado-save-config-btn
 
 Include as module dependency to your app:
 ```javascript
-angular.module('App', [
+var app = angular.module('App', [
 
   'ado.save-config-btn'
 
