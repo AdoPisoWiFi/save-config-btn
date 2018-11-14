@@ -22,10 +22,8 @@
 
           this.update = function (config, params) {
 
-            console.log(config);
-
             var _params = angular.copy(globalConfig.params);
-            params = params? angular.extend(_params, params) : globalConfig.params
+            params = params? angular.extend(_params, params) : globalConfig.params;
 
             return $http({
               method: globalConfig.method,
@@ -45,8 +43,9 @@
     })
     .controller('SaveConfigBtnCtrl', [
       '$scope',
+      '$rootScope',
       'saveConfigBtnService',
-      function SaveConfigBtnCtrl($scope, saveConfigBtnService) {
+      function SaveConfigBtnCtrl($scope, $rootScope, saveConfigBtnService) {
 
         var $ctrl = this;
 
@@ -57,12 +56,14 @@
         $ctrl.submit = function (config) {
           return saveConfigBtnService.update(config)
             .then(function (res) {
+              $rootScope.$broadcast('settings:updated', res.data);
               if (typeof $ctrl.onSuccess == 'function')
-                $ctrl.onSuccess(res)
+                $ctrl.onSuccess(res);
             })
             .catch(function(res) {
+              $rootScope.$broadcast('settings:update:failed', res);
               if (typeof $ctrl.onError == 'function')
-                $ctrl.onError(res)
+                $ctrl.onError(res);
             })
             .finally(function() {
               $ctrl.submitting = false;
