@@ -4,7 +4,7 @@
 
 NPM:
 ```shell
-$ npm i @adopisowifi/save-config-btn
+$ npm i @adopisowifi/save-config-btn --save
 
 ```
 Bower:
