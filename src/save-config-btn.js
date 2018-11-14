@@ -1,3 +1,4 @@
+
 (function () {
   'use strict';
 
@@ -6,7 +7,9 @@
 
       var provider = {};
       var globalConfig = {
-        url: '/settings'
+        params: {},
+        method: 'POST',
+        url: '/settings/config'
       };
 
       provider.config = function (config) {
@@ -17,9 +20,22 @@
         '$http',
         function saveConfigBtnService($http) {
 
-          this.update = function (config) {
-            return $http.post(globalConfig.url, config);
+          this.update = function (config, params) {
+
+            console.log(config);
+
+            var _params = angular.copy(globalConfig.params);
+            params = params? angular.extend(_params, params) : globalConfig.params
+
+            return $http({
+              method: globalConfig.method,
+              url: globalConfig.url,
+              params: params,
+              data: config
+            });
           };
+
+          return this;
 
         }
       ];
@@ -59,12 +75,13 @@
       transclude: true,
       controller: 'SaveConfigBtnCtrl',
       bindings: {
+        ngDisabled: '<',
         btnClass: '@',
         config: '<',
         onSuccess: '&',
         onError: '&'
       },
-      template: '<button ng-click="$ctrl.submit(config)" type="submit" ng-disabled="$ctrl.submitting" class="btn" ng-class="$ctrl.btnClass" ng-click="$ctrl.submit()"><span ng-if="$ctrl.submitting">Saving...</span><ng-transclude ng-if="!$ctrl.submitting"/></button>',
+      template: '<button ng-click="$ctrl.submit($ctrl.config)" type="submit" ng-disabled="$ctrl.submitting || $ctrl.ngDisabled" class="btn" ng-class="$ctrl.btnClass" ng-click="$ctrl.submit()"><span ng-if="$ctrl.submitting">Saving...</span><span ng-transclude ng-if="!$ctrl.submitting"></span></button>',
     });
 
 }).call(window);
