@@ -21,7 +21,9 @@
 
       provider.$get = [
         '$http',
-        function adoConfigService($http) {
+        '$q',
+        '$rootScope',
+        function adoConfigService($http, $q, $rootScope) {
 
           this.get = function (params) {
 
@@ -49,7 +51,15 @@
               url: globalConfig.post_url,
               params: params,
               data: config
-            });
+            })
+              .then(function(res) {
+                $rootScope.$broadcast('settings:updated', res.data);
+                return res;
+              })
+              .catch(function (res) {
+                $rootScope.$broadcast('settings:update:failed', res);
+                return $q.reject(res);
+              });
           };
 
           return this;
@@ -62,9 +72,8 @@
     })
     .controller('SaveConfigBtnCtrl', [
       '$scope',
-      '$rootScope',
       'adoConfigService',
-      function SaveConfigBtnCtrl($scope, $rootScope, adoConfigService) {
+      function SaveConfigBtnCtrl($scope, adoConfigService) {
 
         var $ctrl = this;
 
@@ -73,15 +82,13 @@
         $ctrl.submitting = false;
 
         $ctrl.submit = function (config) {
-        $ctrl.submitting = true;
+          $ctrl.submitting = true;
           return adoConfigService.update(config)
             .then(function (res) {
-              $rootScope.$broadcast('settings:updated', res.data);
               if (typeof $ctrl.onSuccess == 'function')
                 $ctrl.onSuccess(res);
             })
             .catch(function(res) {
-              $rootScope.$broadcast('settings:update:failed', res);
               if (typeof $ctrl.onError == 'function')
                 $ctrl.onError(res);
             })
