@@ -73,6 +73,7 @@
         $ctrl.submitting = false;
 
         $ctrl.submit = function (config) {
+        $ctrl.submitting = true;
           return adoConfigService.update(config)
             .then(function (res) {
               $rootScope.$broadcast('settings:updated', res.data);
