@@ -63,7 +63,7 @@
         onSuccess: '&',
         onError: '&'
       },
-      template: '<button type="submit" ng-disabled="$ctrl.submitting" class="btn" ng-class="$ctrl.btnClass" ng-click="$ctrl.submit()"><span ng-if="$ctrl.submitting">Saving...</span><ng-transclude ng-if="!$ctrl.submitting"/></button>',
+      template: '<button ng-click="$ctrl.submit(config)" type="submit" ng-disabled="$ctrl.submitting" class="btn" ng-class="$ctrl.btnClass" ng-click="$ctrl.submit()"><span ng-if="$ctrl.submitting">Saving...</span><ng-transclude ng-if="!$ctrl.submitting"/></button>',
     });
 
 }).call(window);
