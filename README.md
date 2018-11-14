@@ -24,12 +24,12 @@ var app = angular.module('App', [
 ])
 ```
 
-Set where to submit data using `adoConfigSerivceProvider`:
+Set where to submit data using `adoConfigServiceProvider`:
 ```javascript
-app.config(['adoConfigSerivceProvider', function(adoConfigSerivceProvider) {
+app.config(['adoConfigServiceProvider', function(adoConfigServiceProvider) {
 
   // defaults
-  adoConfigSerivceProvider.config({
+  adoConfigServiceProvider.config({
     get_method: 'GET',
     get_url: '/settings/config',
     get_params: {},

@@ -21,7 +21,7 @@
 
       provider.$get = [
         '$http',
-        function adoConfigSerivce($http) {
+        function adoConfigService($http) {
 
           this.get = function (params) {
 
@@ -63,8 +63,8 @@
     .controller('SaveConfigBtnCtrl', [
       '$scope',
       '$rootScope',
-      'adoConfigSerivce',
-      function SaveConfigBtnCtrl($scope, $rootScope, adoConfigSerivce) {
+      'adoConfigService',
+      function SaveConfigBtnCtrl($scope, $rootScope, adoConfigService) {
 
         var $ctrl = this;
 
@@ -73,7 +73,7 @@
         $ctrl.submitting = false;
 
         $ctrl.submit = function (config) {
-          return adoConfigSerivce.update(config)
+          return adoConfigService.update(config)
             .then(function (res) {
               $rootScope.$broadcast('settings:updated', res.data);
               if (typeof $ctrl.onSuccess == 'function')
