@@ -1,7 +1,7 @@
 {
   "name": "ado-save-config-btn",
   "description": "A module used to save AdoPisoWiFi machine settings",
-  "main": "./src/save-config-btn.js",
+  "main": "src/save-config-btn.js",
   "authors": [
     "AdoPisoWiFi"
   ],
