@@ -23,7 +23,9 @@
         '$http',
         '$q',
         '$rootScope',
-        function adoConfigService($http, $q, $rootScope) {
+        'toastr',
+        'httpError',
+        function adoConfigService($http, $q, $rootScope, toastr, httpError) {
 
           this.get = function (params) {
 
@@ -53,10 +55,12 @@
               data: config
             })
               .then(function(res) {
+                toastr.success("Settings has been saved.");
                 $rootScope.$broadcast('settings:updated', res.data);
                 return res;
               })
               .catch(function (res) {
+                toastr.error(httpError(res));
                 $rootScope.$broadcast('settings:update:failed', res);
                 return $q.reject(res);
               });
