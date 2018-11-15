@@ -77,9 +77,10 @@
 
         var $ctrl = this;
 
-        var device_id = $ctrl.device? $ctrl.device.id : null;
 
         $ctrl.$onInit = function () {
+
+          var device_id = $ctrl.device? $ctrl.device.id : null;
 
           $ctrl.btnClass = $ctrl.btnClass || 'btn-primary';
 
