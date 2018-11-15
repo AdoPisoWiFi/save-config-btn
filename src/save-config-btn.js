@@ -77,6 +77,8 @@
 
         var $ctrl = this;
 
+        var device_id = $ctrl.device? $ctrl.device.id : null;
+
         $ctrl.$onInit = function () {
 
           $ctrl.btnClass = $ctrl.btnClass || 'btn-primary';
@@ -85,7 +87,7 @@
 
           $ctrl.submit = function (config) {
             $ctrl.submitting = true;
-            return adoConfigService.update(config)
+            return adoConfigService.update(config, {id: device_id})
               .then(function (res) {
                 if (typeof $ctrl.onSuccess == 'function')
                   $ctrl.onSuccess(res);
@@ -106,6 +108,7 @@
       transclude: true,
       controller: 'SaveConfigBtnCtrl',
       bindings: {
+        device: '<',
         ngDisabled: '<',
         btnClass: '@',
         config: '<',
