@@ -52,7 +52,7 @@
               method: globalConfig.post_method,
               url: globalConfig.post_url,
               params: params,
-              data: config
+              data: {config: config}
             })
               .then(function(res) {
                 toastr.success("Settings has been saved.");
