@@ -77,24 +77,27 @@
 
         var $ctrl = this;
 
-        $ctrl.btnClass = $ctrl.btnClass || 'btn-primary';
+        $ctrl.$onInit = function () {
 
-        $ctrl.submitting = false;
+          $ctrl.btnClass = $ctrl.btnClass || 'btn-primary';
 
-        $ctrl.submit = function (config) {
-          $ctrl.submitting = true;
-          return adoConfigService.update(config)
-            .then(function (res) {
-              if (typeof $ctrl.onSuccess == 'function')
-                $ctrl.onSuccess(res);
-            })
-            .catch(function(res) {
-              if (typeof $ctrl.onError == 'function')
-                $ctrl.onError(res);
-            })
-            .finally(function() {
-              $ctrl.submitting = false;
-            });
+          $ctrl.submitting = false;
+
+          $ctrl.submit = function (config) {
+            $ctrl.submitting = true;
+            return adoConfigService.update(config)
+              .then(function (res) {
+                if (typeof $ctrl.onSuccess == 'function')
+                  $ctrl.onSuccess(res);
+              })
+              .catch(function(res) {
+                if (typeof $ctrl.onError == 'function')
+                  $ctrl.onError(res);
+              })
+              .finally(function() {
+                $ctrl.submitting = false;
+              });
+          };
         };
 
       }
