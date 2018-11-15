@@ -1,6 +1,6 @@
 {
   "name": "@adopisowifi/save-config-btn",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A module used to save AdoPisoWiFi machine settings",
   "main": "./src/save-config-btn.js",
   "scripts": {
@@ -28,5 +28,8 @@
     "gulp-jshint": "^2.1.0",
     "gulp-uglify": "^3.0.1",
     "jshint": "^2.9.6"
+  },
+  "dependencies": {
+    "@adopisowifi/ng-http-error": "0.0.2"
   }
 }

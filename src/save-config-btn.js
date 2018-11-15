@@ -2,7 +2,10 @@
 (function () {
   'use strict';
 
-  angular.module('ado.save-config-btn', [])
+  angular.module('ado.save-config-btn', [
+    'toastr',
+    'ado.http-error'
+  ])
     .provider('adoConfigService', function() {
 
       var provider = {};
