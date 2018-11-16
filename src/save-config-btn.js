@@ -51,6 +51,10 @@
                 res.data.dont_limit_stations = !res.data.limit_stations;
                 return res;
               })
+              .catch(function (res) {
+                toastr.error(httpError(res));
+                return $q.reject(res);
+              })
               .finally(function () {
                 delete getPromise[params.id];
               });
