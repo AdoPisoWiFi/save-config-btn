@@ -30,12 +30,19 @@
         'httpError',
         function adoConfigService($http, $q, $rootScope, toastr, httpError) {
 
+          var getPromise = {};
+
           this.get = function (params) {
+
+            params = params || {id: 0}
+
+            if (getPromise[params.id])
+              return getPromise[params.id]
 
             var _params = angular.copy(globalConfig.get_params);
             params = params? angular.extend(_params, params) : _params;
 
-            return $http({
+            getPromise[params.id] = $http({
               method: globalConfig.get_method,
               url: globalConfig.get_url,
               params: params
@@ -43,7 +50,12 @@
               .then(function (res) {
                 res.data.dont_limit_stations = !res.data.limit_stations;
                 return res;
+              })
+              .finally(function () {
+                delete getPromise[params.id];
               });
+
+            return getPromise[params.id]
           };
 
           this.update = function (config, params) {
